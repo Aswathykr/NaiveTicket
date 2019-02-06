@@ -9,10 +9,10 @@
  * @author David J. Barnes and Michael Kolling
  * @version 2008.03.30
  */
-public class TicketMachine
+class TicketMachine
 {
     // The price of a ticket from this machine.
-    private int price;
+     private int  price;
     // The amount of money entered by a customer so far.
     private int balance;
     // The total amount of money collected by this machine.
@@ -26,6 +26,13 @@ public class TicketMachine
     public TicketMachine(int ticketCost)
     {
         price = ticketCost;
+        balance = 0;
+        total = 0;
+    }
+    
+    public TicketMachine()
+    {
+        price = 500;
         balance = 0;
         total = 0;
     }
@@ -46,6 +53,12 @@ public class TicketMachine
     {
         return balance;
     }
+    
+    public int getTotal()
+    {
+        return total;
+        
+    }
 
     /**
      * Receive an amount of money in cents from a customer.
@@ -62,17 +75,51 @@ public class TicketMachine
      */
     public void printTicket()
     {
-        // Simulate the printing of a ticket.
-        System.out.println("##################");
-        System.out.println("# The BlueJ Line");
-        System.out.println("# Ticket");
-        System.out.println("# " + price + " cents.");
-        System.out.println("##################");
-        System.out.println();
-
-        // Update the total collected with the balance.
-        total = total + balance;
-        // Clear the balance.
-        balance = 0;
+        int amountLeftToPay = price - balance;
+        if(amountLeftToPay <= 0){
+            // Simulate the printing of a ticket.
+            System.out.println("##################");
+            System.out.println("# The BlueJ Line");
+            System.out.println("# Ticket");
+            System.out.println("# " + price + " cents.");
+            System.out.println("##################");
+            System.out.println();
+        
+    
+            // Update the total collected with the balance.
+            total = total + price;
+            // Clear the balance.
+            balance = balance - price;
+        }
+        else{
+            System.out.println(" You still need "+ amountLeftToPay + " more cents");
+        }
+    }
+    public void setPrice(int price)
+    {
+        this.price = price;
+    }
+    public void empty()
+    {
+        total = 0;
+    }
+    
+    public void prompt()
+    {
+        System.out.println("Please insert the correct amount of money.");
+    }
+    
+    public void showPrice()
+    {
+        System.out.printf("The price of a ticket is %d cents.\n", price);
+    }
+    
+    public String getLoginName() {
+        String name = "aswathy";
+        String id = "098";
+        int nameEndLength = (name.length() > 4 ) ? 4 : name.length();
+        int idEndLength = (id.length() > 3) ? 3 : id.length();
+        return name.substring(0,nameEndLength) + id.substring(0,idEndLength);
     }
 }
+
